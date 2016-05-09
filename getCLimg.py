@@ -95,11 +95,15 @@ card_page_num=card_num_expression.search(page)
 # 如果获取到总页数的话,就按总页数来,如果没有默认为100
 if card_page_num != None:
 	card_page_num=card_page_num.group(0)
+	print("总页数为:"+str(card_page_num))
 else:
 	card_page_num=100
+	print("总页数获取失败,默认为:"+str(card_page_num))
+saveFile=saveFile()
 # 初始页
 x=1
 while(x<int(card_page_num)):
+	print("当前为第"+str(x)+"页数据")
 	x+=1
 	# 判断获取下一页信息
 	if(page==None):
@@ -110,7 +114,6 @@ while(x<int(card_page_num)):
 	# 帖子正则-查询出该页所有的合格帖子
 	card_expression=re.compile(r'<h3><a href="htm_data/.+\[.{1,4}\]</a></h3>')
 	card=card_expression.findall(page)
-	saveFile=saveFile()
 	# 图片保存地址
 	save_img_path="./save_image"
 	saveFile.mkdir(save_img_path)
